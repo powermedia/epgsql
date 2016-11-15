@@ -701,7 +701,9 @@ on_message({?READY_FOR_QUERY, <<Status:8>>}, State) ->
                          [Result] ->
                              finish(State, done, Result);
                          [] ->
-                             finish(State, done)
+                             finish(State, done);
+                         Results ->
+                             finish(State, done, lists:reverse(Results))
                      end;
                  sync ->
                      finish(State, ok)
